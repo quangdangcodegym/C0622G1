@@ -50,24 +50,20 @@ begin
 	declare total decimal(12,0);
     declare sCustomerId integer;
     
-    INSERT INTO `c5_banking`.`customers` (`full_name`, `email`, `phone`, `address`, `balance`, `deleted`) VALUES (sFullName, sEmail, sPhone, sAddress, '0', '0');
     # Kiem tra customer_id co ton tai hay chua
-    if(not exists (SELECT email FROM c5_banking.customers where email = sEmail)) then 
-		INSERT INTO `c5_banking`.`customers` (`full_name`, `email`, `phone`, `address`, `balance`, `deleted`) VALUES (sFullName, sEmail, sPhone, sAddress, '0', '0');
+    if(not exists (SELECT `email` FROM `customers` where `email` = sEmail)) then 
+		INSERT INTO `customers` (`full_name`, `email`, `phone`, `address`, `balance`, `deleted`) VALUES (sFullName, sEmail, sPhone, sAddress, '0', '0');
     end if;
     
-    set sCustomerId = (SELECT id FROM c5_banking.customers where email = sEmail);
-	INSERT INTO `c5_banking`.`deposits` (`created_at`, `deleted`, `customer_id`, `transaction_amount`) VALUES (now(), '0', sCustomerId, sTransactionAmount);
+    set sCustomerId = (SELECT id FROM `customers` where `email` = sEmail);
+	INSERT INTO `deposits` (`created_at`, `deleted`, `customer_id`, `transaction_amount`) VALUES (now(), '0', sCustomerId, sTransactionAmount);
     
     set total = (SELECT balance from customers where id = sCustomerId);
     set total = total + sTransactionAmount;
     
     UPDATE `c5_banking`.`customers` SET `balance` = total WHERE (`id` = sCustomerId);
 
-end
-
-
-#INSERT INTO `c5_banking`.`deposits` (`created_at`, `deleted`, `customer_id`, `transaction_amount`) VALUES ('now()', '0', '2', '1000');
+end; //
 
 
 
