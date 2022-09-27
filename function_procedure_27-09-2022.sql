@@ -51,11 +51,11 @@ begin
     declare sCustomerId integer;
     
     # Kiem tra customer_id co ton tai hay chua
-    if(not exists (SELECT `email` FROM `customers` where `email` = sEmail)) then 
+    if(not exists (SELECT `email` FROM `customers` where `email` COLLATE utf8mb4_0900_ai_ci like sEmail)) then 
 		INSERT INTO `customers` (`full_name`, `email`, `phone`, `address`, `balance`, `deleted`) VALUES (sFullName, sEmail, sPhone, sAddress, '0', '0');
     end if;
     
-    set sCustomerId = (SELECT id FROM `customers` where `email` = sEmail);
+    set sCustomerId = (SELECT id FROM `customers` where `email` COLLATE utf8mb4_0900_ai_ci like sEmail);
 	INSERT INTO `deposits` (`created_at`, `deleted`, `customer_id`, `transaction_amount`) VALUES (now(), '0', sCustomerId, sTransactionAmount);
     
     set total = (SELECT balance from customers where id = sCustomerId);
@@ -63,7 +63,7 @@ begin
     
     UPDATE `customers` SET `balance` = total WHERE (`id` = sCustomerId);
 
-end; //
+end //
 
 
 
