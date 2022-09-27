@@ -61,7 +61,7 @@ begin
     set total = (SELECT balance from customers where id = sCustomerId);
     set total = total + sTransactionAmount;
     
-    UPDATE `c5_banking`.`customers` SET `balance` = total WHERE (`id` = sCustomerId);
+    UPDATE `customers` SET `balance` = total WHERE (`id` = sCustomerId);
 
 end; //
 
