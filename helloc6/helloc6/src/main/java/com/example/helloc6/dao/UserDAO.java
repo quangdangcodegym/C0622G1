@@ -43,6 +43,7 @@ public class UserDAO implements IUserDAO{
         preparedStatement.setInt(3, user.getIdCountry());
 
         preparedStatement.executeUpdate();
+
     }
 
     @Override

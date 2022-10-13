@@ -7,26 +7,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountryDAO implements ICountryDAO{
+public class CountryDAO extends DatabaseQuery implements ICountryDAO{
 
     private static final String SELECT_ALL_COUNTRY = "SELECT * FROM country";
     private static final String SELECT_COUNTRY = "SELECT * FROM country where id = ?;";
-    private String jdbcURL = "jdbc:mysql://localhost:3306/c6_customermanager?useSSL=false";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "St180729!!";
 
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
+
+
     @Override
     public void insertCountry(Country country) throws SQLException {
 
@@ -97,4 +84,6 @@ public class CountryDAO implements ICountryDAO{
             }
         }
     }
+
+
 }
