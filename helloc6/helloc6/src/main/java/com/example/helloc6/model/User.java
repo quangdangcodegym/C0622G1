@@ -38,7 +38,7 @@ public class User {
         this.name = name;
     }
 
-    @Email(regexp = "^[A-Za-z0-9.]*[A-Za-z0-9]+@[A-Za-z0-9]+(\\\\.[A-Za-z0-9]+)$", message = "Email không hợp lệ")
+    @Email(regexp = "^[A-Za-z0-9.]*[A-Za-z0-9]+@[A-Za-z0-9]+(.[A-Za-z0-9]+)$", message = "Email không hợp lệ")
     public String getEmail() {
         return email;
     }

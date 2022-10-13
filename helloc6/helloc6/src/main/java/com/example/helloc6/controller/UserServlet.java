@@ -82,7 +82,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void listUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/list.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/list.jsp");
         List<User> listUser = iUserDAO.selectAllUsers();
 
          request.setAttribute("list", listUser);
@@ -90,7 +90,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user/create.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/create.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -118,7 +118,7 @@ public class UserServlet extends HttpServlet {
             String name = request.getParameter("name");
             String email = request.getParameter("email");
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/create.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/create.jsp");
         User user = new User();
             try{
 
