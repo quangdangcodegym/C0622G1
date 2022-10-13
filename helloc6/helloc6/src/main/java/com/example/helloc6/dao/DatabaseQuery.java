@@ -24,6 +24,7 @@ public abstract class DatabaseQuery {
     }
 
     protected void closeConnection(Connection connection) {
+        System.out.println("close connection");
         try {
             connection.close();
         } catch (SQLException e) {
