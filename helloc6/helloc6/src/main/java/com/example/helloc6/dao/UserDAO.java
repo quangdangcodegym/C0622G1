@@ -7,32 +7,19 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements IUserDAO{
+public class UserDAO extends DatabaseQuery implements IUserDAO{
 
     private static final String INSERT_USER = "INSERT INTO `users` (`name`, `email`, `idCountry`) " +
             "VALUES (?, ?, ?)";
     private static final String CHECK_EMAIL_EXISTS = "SELECT * FROM users where email = ?";
     private static final String SP_EDIT_USER = "call c6_customermanager.sp_editUser(?, ?, ?, ?, ?)";
-    private String jdbcURL = "jdbc:mysql://localhost:3306/c6_customermanager?useSSL=false";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "St180729!!";
+
 
 
     private String SELECT_ALL_USERS = "SELECT id, name, email, idcountry FROM users";
     private String SELECT_USER_BYID = "SELECT id, name, email, idcountry FROM users where id = ?";
 
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
+
 
 
     @Override
@@ -159,19 +146,5 @@ public class UserDAO implements IUserDAO{
         return false;
     }
 
-    private void printSQLException(SQLException ex) {
-        for (Throwable e : ex) {
-            if (e instanceof SQLException) {
-                e.printStackTrace(System.err);
-                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-                System.err.println("Message: " + e.getMessage());
-                Throwable t = ex.getCause();
-                while (t != null) {
-                    System.out.println("Cause: " + t);
-                    t = t.getCause();
-                }
-            }
-        }
-    }
+
 }

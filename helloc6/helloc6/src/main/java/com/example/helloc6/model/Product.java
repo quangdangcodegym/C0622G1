@@ -1,5 +1,6 @@
 package com.example.helloc6.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product {
@@ -9,15 +10,26 @@ public class Product {
     private Date updateAt;
     private String description;
 
+    private BigDecimal price;
     public Product(){
 
     }
-    public Product(int id, String name, Date createAt, Date updateAt, String description) {
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Product(int id, String name, BigDecimal price, Date createAt, Date updateAt, String description) {
         this.id = id;
         this.name = name;
         this.createAt = createAt;
         this.updateAt = updateAt;
         this.description = description;
+        this.price = price;
     }
 
     public int getId() {
