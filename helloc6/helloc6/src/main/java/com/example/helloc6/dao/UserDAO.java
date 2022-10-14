@@ -12,6 +12,7 @@ public class UserDAO implements IUserDAO{
     private static final String INSERT_USER = "INSERT INTO `users` (`name`, `email`, `idCountry`) " +
             "VALUES (?, ?, ?)";
     private static final String CHECK_EMAIL_EXISTS = "SELECT * FROM users where email = ?";
+    private static final String SP_EDIT_USER = "call c6_customermanager.sp_editUser(?, ?, ?, ?, ?)";
     private String jdbcURL = "jdbc:mysql://localhost:3306/c6_customermanager?useSSL=false";
     private String jdbcUsername = "root";
     private String jdbcPassword = "St180729!!";
@@ -45,6 +46,7 @@ public class UserDAO implements IUserDAO{
         preparedStatement.executeUpdate();
 
     }
+
 
     @Override
     public User selectUser(int id) {
@@ -123,6 +125,25 @@ public class UserDAO implements IUserDAO{
     @Override
     public boolean updateUser(User user) throws SQLException {
         return false;
+    }
+
+    @Override
+    public boolean updateUserWithSP(User user) throws SQLException {
+        Connection connection = getConnection();
+        //call c6_customermanager.sp_editUser(?, ?, ?, ?, ?)
+        CallableStatement callableStatement = connection.prepareCall(SP_EDIT_USER);
+        callableStatement.setInt(1, user.getId());
+        callableStatement.setString(2, user.getName());
+        callableStatement.setString(3, user.getEmail());
+        callableStatement.setInt(4, user.getIdCountry());
+        callableStatement.registerOutParameter(5, Types.VARCHAR);
+
+        System.out.println(this.getClass() + " updateUserWithSP " + callableStatement);
+        callableStatement.executeUpdate();
+        String message = callableStatement.getString(5);
+        System.out.println("Message: " + message);
+
+        return true;
     }
 
     @Override

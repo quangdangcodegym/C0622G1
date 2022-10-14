@@ -5,7 +5,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Form Elements | Zircos - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>Edited User</title>
         <jsp:include page="/layout/meta_css.jsp">
             <jsp:param name="page" value="create"/>
         </jsp:include>
@@ -70,7 +70,7 @@
                                     </script>
                                 </c:if>
 
-                                <form class="form-horizontal" action="/user?action=create" method="post">
+                                <form class="form-horizontal" action="/user?action=edit&id=${user.getId()}" method="post">
                                     <div class="form-group row">
                                         <label class="col-md-2 control-label">Username</label>
                                         <div class="col-md-10">
@@ -88,14 +88,14 @@
                                         <div class="col-md-10">
                                             <select name="country" class="form-control">
                                                 <c:forEach items="${applicationScope.listCountry}" var="country">
-                                                    <option value="${country.getId()}">${country.getName()}</option>
+                                                    <option <c:if test="${user.getIdCountry() == country.getId()}">selected</c:if> value="${country.getId()}">${country.getName()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <button type="submit" class="btn btn-primary waves-effect waves-light btn-md">
-                                            Create
+                                            Edit
                                         </button>
 
                                     </div>

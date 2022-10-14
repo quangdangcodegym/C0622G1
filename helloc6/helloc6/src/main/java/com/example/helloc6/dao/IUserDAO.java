@@ -16,5 +16,7 @@ public interface IUserDAO {
 
     public boolean updateUser(User user) throws SQLException;
 
+    public boolean updateUserWithSP(User user) throws SQLException;
+
     public boolean checkEmailExists(String email) throws SQLException;
 }

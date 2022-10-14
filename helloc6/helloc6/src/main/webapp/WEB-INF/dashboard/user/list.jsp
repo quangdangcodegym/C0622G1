@@ -61,7 +61,9 @@
                                     <c:forEach items="${requestScope.list}" var="user">
                                         <tr>
                                             <th scope="row">${user.getId()}</th>
-                                            <td>${user.getName()}</td>
+                                            <td>
+                                                <a href="/user?action=edit&id=${user.getId()}">${user.getName()}</a>
+                                            </td>
                                             <td>${user.getEmail()}</td>
                                             <td>
                                                 <c:forEach items="${applicationScope.listCountry}" var="country">

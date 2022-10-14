@@ -61,13 +61,13 @@ public class UserServlet extends HttpServlet {
             RequestDispatcher requestDispatcher;
             if(user ==null){
                 // User khong ton tai
-                requestDispatcher = request.getRequestDispatcher("user/list.jsp");
+                requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/list.jsp");
                 request.setAttribute("message", "User khong ton tai");
                 List<User> list = iUserDAO.selectAllUsers();
                 request.setAttribute("list", list);
 
             }else{
-                requestDispatcher = request.getRequestDispatcher("user/edit.jsp");
+                requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/edit.jsp");
                 request.setAttribute("user", user);
             }
 
@@ -105,6 +105,9 @@ public class UserServlet extends HttpServlet {
                     case "create":
                         insertUser(request, response);
                         break;
+                    case "edit":
+                        editUser(request, response);
+                        break;
                 }
             }catch (SQLException ex){
                 ex.printStackTrace();
@@ -113,10 +116,80 @@ public class UserServlet extends HttpServlet {
 
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-            List<String> errors = new ArrayList<>();
-            String name = request.getParameter("name");
+    private void editUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        List<String> errors = new ArrayList<>();
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/edit.jsp");
+        User user = new User();
+        try{
+            int idUser = Integer.parseInt(request.getParameter("id"));
+
             String email = request.getParameter("email");
+            String name = request.getParameter("name");
+            int idCountry = Integer.parseInt(request.getParameter("country"));
+
+            user = iUserDAO.selectUser(idUser);
+            boolean checkEmail  = false;
+            if(user.getEmail().equals(email)){
+                checkEmail = true;
+            }
+            user.setName(name);
+            user.setEmail(email);
+            user.setIdCountry(idCountry);
+
+            ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+            Validator validator = validatorFactory.getValidator();
+            Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
+            if(!constraintViolations.isEmpty()){
+                for(ConstraintViolation<User> constraintViolation : constraintViolations){
+                    errors.add(constraintViolation.getMessage());
+                }
+                request.setAttribute("user", user);
+                request.setAttribute("errors", errors);
+            }else{
+
+                Country country = iCountryDAO.selectCountry(idCountry);
+                boolean isEmailValid = (checkEmail==true || !iUserDAO.checkEmailExists(user.getEmail()));
+                if(isEmailValid){
+                    if(country==null){
+                        errors.add("Mã country không hợp lệ");
+                        request.setAttribute("errors", errors);
+                    }else{
+                        iUserDAO.updateUserWithSP(user);
+                        request.setAttribute("message", "Update success!!.....");
+                        List<User> listUser = iUserDAO.selectAllUsers();
+                        request.setAttribute("list", listUser);
+                        requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/list.jsp");
+                    }
+                }else {
+                    if(country==null){
+                        errors.add("Mã country không hợp lệ");
+                        request.setAttribute("errors", errors);
+                    }
+                    request.setAttribute("user", user);
+                    errors.add("Email đã tồn tại");
+                    request.setAttribute("errors", errors);
+                }
+
+            }
+            requestDispatcher.forward(request, response);
+        }catch (NumberFormatException numberFormatException){
+            //
+            errors.add("Định dạng của country không hợp lệ");
+            request.setAttribute("errors", errors);
+            request.setAttribute("user", user);
+            requestDispatcher.forward(request, response);
+        }
+
+
+
+
+    }
+
+    private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        List<String> errors = new ArrayList<>();
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/create.jsp");
         User user = new User();
