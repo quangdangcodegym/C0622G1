@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <title>Dashboard 1 | Zircos - Responsive Bootstrap 4 Admin Dashboard</title>
-        <jsp:include page="/layout/meta_css.jsp"></jsp:include>
+        <jsp:include page="/layout/admin/meta_css.jsp"></jsp:include>
     </head>
 
     <body data-layout="horizontal">
@@ -13,7 +13,7 @@
         <div id="wrapper">
 
             <!-- Navigation Bar-->
-                <jsp:include page="/layout/topnav.jsp"></jsp:include>
+                <jsp:include page="/layout/admin/topnav.jsp"></jsp:include>
                 <!-- End Navigation Bar-->
 
             <!-- ============================================================== -->
@@ -349,7 +349,7 @@
                 
 
                 <!-- Footer Start -->
-                <jsp:include page="/layout/footer.jsp"></jsp:include>
+                <jsp:include page="/layout/admin/footer.jsp"></jsp:include>
                 <!-- end Footer -->
 
             </div>
@@ -362,11 +362,11 @@
         <!-- END wrapper -->
 
         <!-- Right Sidebar -->
-        <jsp:include page="/layout/rightbar.jsp"></jsp:include>
+        <jsp:include page="/layout/admin/rightbar.jsp"></jsp:include>
 
 
 
-        <jsp:include page="/layout/footer_js.jsp">
+        <jsp:include page="/layout/admin/footer_js.jsp">
             <jsp:param name="page" value="index"/>
         </jsp:include>
 
