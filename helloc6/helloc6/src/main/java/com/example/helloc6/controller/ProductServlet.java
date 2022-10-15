@@ -13,6 +13,8 @@ import java.io.IOException;
 @WebServlet(name = "ProductServlet", urlPatterns = "/product")
 public class ProductServlet extends HttpServlet {
 
+
+
     private IProductDAO iProductDAO;
     @Override
     public void init() throws ServletException {
