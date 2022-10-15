@@ -51,7 +51,37 @@ public class OrderServlet extends HttpServlet {
             default:
                 showListOrder(req, resp);
         }
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "edit":
+                editOrder(req, resp);
+                break;
+            default:
+                showListOrder(req, resp);
+        }
+    }
+
+    private void editOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        try {
+            int idOrder = Integer.parseInt(req.getParameter("id"));
+            int idOrderStatus = Integer.parseInt(req.getParameter("orderstatus"));
+            OrderDTO orderDTO = iOrderDTODAO.selectOrderDTO(idOrder);
+            orderDTO.setIdStatus(idOrderStatus);
+
+            iOrderDTODAO.updateOrderDTO(orderDTO);
+            resp.sendRedirect("/order");
+        } catch (NumberFormatException numberFormatException) {
+
+        } catch (SQLException sqlException) {
+
+        }
 
     }
 

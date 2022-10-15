@@ -8,11 +8,14 @@ import com.example.helloc6.model.Order;
 import com.example.helloc6.model.dto.OrderDTO;
 import com.example.helloc6.model.dto.OrderItemDTO;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDTODAO extends DatabaseQuery implements IOrderDTODAO {
+    private static final String UPDATE_ORDER_BYORDERID = "UPDATE `order` SET `idstatus` = ? WHERE (`id` = ?);";
     private IOrderDAO iOrderDAO;
     private IOrderItemDTODAO iOrderItemDTODAO;
 
@@ -27,13 +30,14 @@ public class OrderDTODAO extends DatabaseQuery implements IOrderDTODAO {
 
     @Override
     public OrderDTO selectOrderDTO(int id) throws SQLException {
-        List<OrderDTO> orderDTOList = selectAllOrderDTO();
-        for (OrderDTO orderDTO : orderDTOList) {
-            if(orderDTO.getId() == id){
-                return orderDTO;
-            }
-        }
-        return null;
+
+        Order order = iOrderDAO.selectOrder(id);
+        List<OrderItemDTO> orderItemList = iOrderItemDTODAO.selectAllOrderItemDTOByOrderId(order.getId());
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setOrderToOrderDTO(order);
+        orderDTO.setOrderItemList(orderItemList);
+
+        return orderDTO;
     }
 
     @Override
@@ -59,7 +63,14 @@ public class OrderDTODAO extends DatabaseQuery implements IOrderDTODAO {
 
     @Override
     public boolean updateOrderDTO(OrderDTO orderDTO) throws SQLException {
-        return false;
+        Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ORDER_BYORDERID);
+        preparedStatement.setInt(1, orderDTO.getIdStatus());
+        preparedStatement.setInt(2, orderDTO.getId());
+
+        int row = preparedStatement.executeUpdate();
+
+        return row >=1 ;
     }
 
     @Override

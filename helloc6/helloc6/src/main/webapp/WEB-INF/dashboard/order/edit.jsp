@@ -70,7 +70,7 @@
                                     </script>
                                 </c:if>
 
-                                <form class="form-horizontal" action="/order?action=edit&id=${user.getId()}" method="post">
+                                <form class="form-horizontal" action="/order?action=edit&id=${requestScope.orderDTO.getId()}" method="post">
                                     <div class="form-group row">
                                         <label class="col-md-2 control-label">Username</label>
                                         <div class="col-md-10">
