@@ -1,10 +1,7 @@
 package com.example.helloc6.controller;
 
-import com.example.helloc6.dao.IProductDAO;
 import com.example.helloc6.dao.IProductDTODAO;
-import com.example.helloc6.dao.ProductDAO;
-import com.example.helloc6.dao.ProductDTODAO;
-import com.example.helloc6.model.Product;
+import com.example.helloc6.dao.impl.ProductDTODAO;
 import com.example.helloc6.model.dto.ProductDTO;
 
 import javax.servlet.RequestDispatcher;

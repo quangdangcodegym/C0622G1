@@ -1,5 +1,7 @@
-package com.example.helloc6.dao;
+package com.example.helloc6.dao.impl;
 
+import com.example.helloc6.dao.DatabaseQuery;
+import com.example.helloc6.dao.IImageDAO;
 import com.example.helloc6.model.Image;
 
 import java.sql.Connection;
@@ -9,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageDAO extends DatabaseQuery implements IImageDAO{
+public class ImageDAO extends DatabaseQuery implements IImageDAO {
     private static final String SELECT_ALL_IMAGE_BY_PRODUCTID = "SELECT id, name, url,isavatar FROM image where productid = ? order by isavatar desc;";
 
     @Override

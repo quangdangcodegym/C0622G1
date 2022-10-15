@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class Order {
     private int id;
     private String name;
+    private String phone;
     private String address;
     private int idStatus;
     private BigDecimal total;
@@ -22,6 +23,14 @@ public class Order {
 
     public String getName() {
         return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public void setName(String name) {
@@ -52,7 +61,8 @@ public class Order {
         this.total = total;
     }
 
-    public Order(int id, String name, String address, int idStatus, BigDecimal total) {
+    public Order(int id, String name,String phone, String address, int idStatus, BigDecimal total) {
+        this.phone = phone;
         this.id = id;
         this.name = name;
         this.address = address;

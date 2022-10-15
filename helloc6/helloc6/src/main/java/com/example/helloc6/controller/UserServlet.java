@@ -1,9 +1,9 @@
 package com.example.helloc6.controller;
 
-import com.example.helloc6.dao.CountryDAO;
+import com.example.helloc6.dao.impl.CountryDAO;
 import com.example.helloc6.dao.ICountryDAO;
 import com.example.helloc6.dao.IUserDAO;
-import com.example.helloc6.dao.UserDAO;
+import com.example.helloc6.dao.impl.UserDAO;
 import com.example.helloc6.model.Country;
 import com.example.helloc6.model.User;
 
@@ -49,12 +49,15 @@ public class UserServlet extends HttpServlet {
                     listUser(request, response);
 
             }
-        } catch (IOException ex) {
+        }catch (SQLException sql){
+
+        }
+        catch (IOException ex) {
             throw new ServletException(ex);
         }
     }
 
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         try{
             int id = Integer.parseInt(request.getParameter("id"));
             User user = iUserDAO.selectUser(id);
@@ -81,7 +84,7 @@ public class UserServlet extends HttpServlet {
 
     }
 
-    private void listUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/list.jsp");
         List<User> listUser = iUserDAO.selectAllUsers();
 

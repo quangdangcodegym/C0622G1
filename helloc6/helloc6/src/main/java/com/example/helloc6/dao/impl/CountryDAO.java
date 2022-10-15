@@ -1,5 +1,7 @@
-package com.example.helloc6.dao;
+package com.example.helloc6.dao.impl;
 
+import com.example.helloc6.dao.DatabaseQuery;
+import com.example.helloc6.dao.ICountryDAO;
 import com.example.helloc6.model.Country;
 import com.example.helloc6.model.User;
 
@@ -7,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountryDAO extends DatabaseQuery implements ICountryDAO{
+public class CountryDAO extends DatabaseQuery implements ICountryDAO {
 
 
     private static final String SELECT_ALL_COUNTRY = "SELECT * FROM country";

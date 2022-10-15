@@ -1,5 +1,7 @@
-package com.example.helloc6.dao;
+package com.example.helloc6.dao.impl;
 
+import com.example.helloc6.dao.DatabaseQuery;
+import com.example.helloc6.dao.IProductDAO;
 import com.example.helloc6.model.Product;
 
 import java.math.BigDecimal;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ProductDAO extends DatabaseQuery implements IProductDAO{
+public class ProductDAO extends DatabaseQuery implements IProductDAO {
     private static final String SELECT_ALL_PRODUCT = "SELECT id, name, price, createAt, updateAt, description FROM product;";
     private static final String SELECT_PRODUCT = "SELECT id, name, price, createAt, updateAt, description FROM product where id = ?";
 

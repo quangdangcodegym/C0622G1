@@ -1,17 +1,18 @@
-package com.example.helloc6.dao;
+package com.example.helloc6.dao.impl;
 
+import com.example.helloc6.dao.DatabaseQuery;
+import com.example.helloc6.dao.IImageDAO;
+import com.example.helloc6.dao.IProductDAO;
+import com.example.helloc6.dao.IProductDTODAO;
 import com.example.helloc6.model.Image;
 import com.example.helloc6.model.Product;
 import com.example.helloc6.model.dto.ProductDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDTODAO extends DatabaseQuery implements IProductDTODAO{
+public class ProductDTODAO extends DatabaseQuery implements IProductDTODAO {
     private IProductDAO iProductDAO;
     private IImageDAO iImageDAO;
 

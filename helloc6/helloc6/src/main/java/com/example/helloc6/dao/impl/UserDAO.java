@@ -1,5 +1,7 @@
-package com.example.helloc6.dao;
+package com.example.helloc6.dao.impl;
 
+import com.example.helloc6.dao.DatabaseQuery;
+import com.example.helloc6.dao.IUserDAO;
 import com.example.helloc6.model.User;
 import com.mysql.cj.xdevapi.PreparableStatement;
 
@@ -7,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO extends DatabaseQuery implements IUserDAO{
+public class UserDAO extends DatabaseQuery implements IUserDAO {
 
     private static final String INSERT_USER = "INSERT INTO `users` (`name`, `email`, `idCountry`) " +
             "VALUES (?, ?, ?)";
@@ -53,7 +55,7 @@ public class UserDAO extends DatabaseQuery implements IUserDAO{
                 User user = new User(idUser, name, email, idCountry);
                 return user;
             }
-            //preparableStatement.setString(2, name);
+            connection.close();
         }catch (SQLException ex){
             printSQLException(ex);
         }
@@ -77,6 +79,7 @@ public class UserDAO extends DatabaseQuery implements IUserDAO{
                 User user = new User(id, name, email, idCountry);
                 listUser.add(user);
             }
+            connection.close();
         }catch (SQLException ex){
             printSQLException(ex);
         }

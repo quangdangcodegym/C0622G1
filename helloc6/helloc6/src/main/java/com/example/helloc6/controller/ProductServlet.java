@@ -1,7 +1,7 @@
 package com.example.helloc6.controller;
 
 import com.example.helloc6.dao.IProductDAO;
-import com.example.helloc6.dao.ProductDAO;
+import com.example.helloc6.dao.impl.ProductDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

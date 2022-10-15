@@ -1,27 +1,24 @@
-package com.example.helloc6.model;
+package com.example.helloc6.model.dto;
+
+import com.example.helloc6.model.Product;
 
 import java.math.BigDecimal;
 
-public class OrderItem {
+public class OrderItemDTO {
     private int id;
     private int idOrder;
-    private int idProduct;
+    private Product product;
     private int quantity;
     private BigDecimal price;
+    public OrderItemDTO(){
 
-    public int getQuantity() {
-        return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public OrderItem(int id, int idOrder, int idProduct, int quantity, BigDecimal price) {
-        this.quantity = quantity;
+    public OrderItemDTO(int id, int idOrder, Product product, int quantity, BigDecimal price) {
         this.id = id;
         this.idOrder = idOrder;
-        this.idProduct = idProduct;
+        this.product = product;
+        this.quantity = quantity;
         this.price = price;
     }
 
@@ -41,12 +38,20 @@ public class OrderItem {
         this.idOrder = idOrder;
     }
 
-    public int getIdProduct() {
-        return idProduct;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setIdProduct(int idProduct) {
-        this.idProduct = idProduct;
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public BigDecimal getPrice() {
