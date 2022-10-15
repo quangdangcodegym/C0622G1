@@ -42,12 +42,18 @@ public class ProductServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
+                showCreateProduct(req, resp);
                 break;
             default:
                 showListProduct(req, resp);
         }
 
 
+    }
+
+    private void showCreateProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/dashboard/product/create.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     private void showListProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{

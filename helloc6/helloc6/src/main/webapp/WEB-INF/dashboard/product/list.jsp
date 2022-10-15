@@ -89,7 +89,14 @@
                                         <tr>
                                             <th scope="row">${productDTO.getId()}</th>
                                             <td>
-                                                <img style="width: 100px; height: 100px" src="${productDTO.getListImages().get(0).getUrl()}"/>
+                                                <img style="width: 100px; height: 100px"
+                                                        <c:choose>
+                                                            <c:when test="${!productDTO.listImages.isEmpty()}">
+                                                                src ="${productDTO.listImages.get(0).getUrl()}"
+                                                            </c:when>
+                                                            <c:otherwise>src ="/frontend/assets/img/noimage.png"</c:otherwise>
+                                                        </c:choose>
+                                                />
                                             </td>
                                             <td>
                                                 <a href="/order?action=edit&id=${productDTO.getId()}">${productDTO.getName()}</a>
@@ -131,7 +138,7 @@
                                             </li>
                                         </c:when>
                                         <c:otherwise>
-                                            <li class="page-item active">
+                                            <li class="page-item">
                                                 <a href="/product?page=${i}&q=${requestScope.q}&idcountry=${requestScope.idcategory}" class="page-link">${i}</a>
                                             </li>
                                         </c:otherwise>

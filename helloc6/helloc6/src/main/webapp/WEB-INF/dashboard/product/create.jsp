@@ -70,7 +70,7 @@
                                     </script>
                                 </c:if>
 
-                                <form class="form-horizontal" action="/user?action=create" method="post">
+                                <form class="form-horizontal" action="/product?action=create" method="post">
                                     <div class="form-group row">
                                         <label class="col-md-2 control-label">Username</label>
                                         <div class="col-md-10">
