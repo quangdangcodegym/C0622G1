@@ -12,7 +12,7 @@
         <strong>Customize </strong> the overall color scheme, layout, etc.
       </div>
       <div class="mb-2">
-        <img src="/assets\images\layouts\light.png" class="img-fluid img-thumbnail" alt="">
+        <img src="/admin/assets\images\layouts\light.png" class="img-fluid img-thumbnail" alt="">
       </div>
       <div class="custom-control custom-switch mb-3">
         <input type="checkbox" class="custom-control-input theme-choice" id="light-mode-switch" checked="">
@@ -20,26 +20,26 @@
       </div>
 
       <div class="mb-2">
-        <img src="/assets\images\layouts\dark.png" class="img-fluid img-thumbnail" alt="">
+        <img src="/admin/assets\images\layouts\dark.png" class="img-fluid img-thumbnail" alt="">
       </div>
       <div class="custom-control custom-switch mb-3">
-        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsstyle="/assets/css/bootstrap-dark.min.css" data-appstyle="/assets/css/app-dark.min.css">
+        <input type="checkbox" class="custom-control-input theme-choice" id="dark-mode-switch" data-bsstyle="/admin/assets/css/bootstrap-dark.min.css" data-appstyle="/admin/assets/css/app-dark.min.css">
         <label class="custom-control-label" for="dark-mode-switch">Dark Mode</label>
       </div>
 
       <div class="mb-2">
-        <img src="/assets\images\layouts\rtl.png" class="img-fluid img-thumbnail" alt="">
+        <img src="/admin/assets\images\layouts\rtl.png" class="img-fluid img-thumbnail" alt="">
       </div>
       <div class="custom-control custom-switch mb-3">
-        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appstyle="/assets/css/app-rtl.min.css">
+        <input type="checkbox" class="custom-control-input theme-choice" id="rtl-mode-switch" data-appstyle="/admin/assets/css/app-rtl.min.css">
         <label class="custom-control-label" for="rtl-mode-switch">RTL Mode</label>
       </div>
 
       <div class="mb-2">
-        <img src="/assets\images\layouts\dark-rtl.png" class="img-fluid img-thumbnail" alt="">
+        <img src="/admin/assets\images\layouts\dark-rtl.png" class="img-fluid img-thumbnail" alt="">
       </div>
       <div class="custom-control custom-switch mb-5">
-        <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch" data-bsstyle="/assets/css/bootstrap-dark.min.css" data-appstyle="/assets/css/app-dark-rtl.min.css">
+        <input type="checkbox" class="custom-control-input theme-choice" id="dark-rtl-mode-switch" data-bsstyle="/admin/assets/css/bootstrap-dark.min.css" data-appstyle="/admin/assets/css/app-dark-rtl.min.css">
         <label class="custom-control-label" for="dark-rtl-mode-switch">Dark RTL Mode</label>
       </div>
 

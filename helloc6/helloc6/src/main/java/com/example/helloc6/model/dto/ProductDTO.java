@@ -1,5 +1,6 @@
 package com.example.helloc6.model.dto;
 
+import com.example.helloc6.model.Category;
 import com.example.helloc6.model.Image;
 import com.example.helloc6.model.Product;
 
@@ -14,6 +15,28 @@ public class ProductDTO {
     private Date createAt;
     private Date updateAt;
     private String description;
+    private Category category;
+
+
+    public ProductDTO(int id, String name, BigDecimal price, Date createAt, Date updateAt, String description, Category category, List<Image> listImages) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+        this.description = description;
+        this.category = category;
+        this.listImages = listImages;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     private List<Image> listImages;
 
     public BigDecimal getPrice() {
@@ -96,6 +119,7 @@ public class ProductDTO {
     }
 
     public List<Image> getListImages() {
+
         return listImages;
     }
 

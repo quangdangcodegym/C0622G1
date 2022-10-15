@@ -12,6 +12,10 @@ public interface IProductDTODAO {
 
     public List<ProductDTO> selectAllProductDTOs();
 
+    public List<ProductDTO> selectAllProductDTO(int page, int recordsPerPage, String q, int idCategory);
+
+    public int getNoOfRecords();
+
     public boolean deleteProductDTO(int id) throws SQLException;
 
     public boolean updateProductDTO(ProductDTO ProductDTO) throws SQLException;

@@ -250,7 +250,13 @@
                                                     <div class="col-lg-3">
                                                         <div class="single_product">
                                                             <div class="product_thumb">
-                                                                <a href="single-product.html"><img src="${product.listImages.get(0).getUrl()}" alt=""></a>
+                                                                <a href="single-product.html">
+                                                                    <img <c:choose>
+                                                                                    <c:when test="${!product.listImages.isEmpty()}">
+                                                                                        src ="${product.listImages.get(0).getUrl()}"
+                                                                                    </c:when>
+                                                                                    <c:otherwise>src ="/frontend/assets/img/noimage.png"</c:otherwise>
+                                                                                </c:choose> alt=""></a>
                                                                 <div class="img_icone">
                                                                     <img src="/frontend/assets\img\cart\span-new.png" alt="">
                                                                 </div>
@@ -289,7 +295,12 @@
                                                     <div class="col-lg-3">
                                                         <div class="single_product">
                                                             <div class="product_thumb">
-                                                                <a href="single-product.html"><img src="${product.listImages.get(0).getUrl()}" alt=""></a>
+                                                                <a href="single-product.html"><img <c:choose>
+                                                                <c:when test="${!product.listImages.isEmpty()}">
+                                                                        src ="${product.listImages.get(0).getUrl()}"
+                                                                </c:when>
+                                                                        <c:otherwise>src ="/frontend/assets/img/noimage.png"</c:otherwise>
+                                                                </c:choose> alt=""></a>
                                                                 <div class="img_icone">
                                                                     <img src="/frontend/assets\img\cart\span-new.png" alt="">
                                                                 </div>
