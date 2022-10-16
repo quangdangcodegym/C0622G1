@@ -82,6 +82,7 @@
                                         <th>Category</th>
                                         <th>CreateAt</th>
                                         <th>UpdateAt</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>

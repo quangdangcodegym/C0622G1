@@ -44,6 +44,7 @@ public class ImageDAO extends DatabaseQuery implements IImageDAO {
                 Image image = getImageFromResultSet(rs);
                 listImage.add(image);
             }
+            connection.close();
         }catch (SQLException ex){
             printSQLException(ex);
         }

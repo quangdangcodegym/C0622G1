@@ -35,6 +35,7 @@ public class OrderDAO extends DatabaseQuery implements IOrderDAO {
                 Order order = getOrderFromResultSet(rs);
                 return order;
             }
+            connection.close();
         }catch (SQLException ex){
             printSQLException(ex);
         }

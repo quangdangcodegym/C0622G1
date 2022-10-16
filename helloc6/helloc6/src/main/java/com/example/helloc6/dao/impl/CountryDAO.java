@@ -36,6 +36,7 @@ public class CountryDAO extends DatabaseQuery implements ICountryDAO {
                 Country country = new Country(id, name);
                 return country;
             }
+            connection.close();
         }catch (SQLException ex){
             printSQLException(ex);
         }
@@ -56,6 +57,7 @@ public class CountryDAO extends DatabaseQuery implements ICountryDAO {
                 Country country = new Country(id, name);
                 listCountry.add(country);
             }
+            connection.close();
         }catch (SQLException ex){
             printSQLException(ex);
         }

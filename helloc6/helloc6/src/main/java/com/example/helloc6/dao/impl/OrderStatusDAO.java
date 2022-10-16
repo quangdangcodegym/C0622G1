@@ -27,6 +27,7 @@ public class OrderStatusDAO extends DatabaseQuery implements IOrderStatusDAO {
                 OrderStatus orderStatus = getOrderStatusFromResultSet(rs);
                 return orderStatus;
             }
+            connection.close();
             //preparableStatement.setString(2, name);
         }catch (SQLException ex){
             printSQLException(ex);
@@ -55,6 +56,7 @@ public class OrderStatusDAO extends DatabaseQuery implements IOrderStatusDAO {
                 OrderStatus orderStatus = getOrderStatusFromResultSet(rs);
                 listOrderStatus.add(orderStatus);
             }
+            connection.close();
         }catch (SQLException ex){
             printSQLException(ex);
         }

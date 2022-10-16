@@ -28,6 +28,7 @@ public class CategoryDAO extends DatabaseQuery implements ICategoryDAO {
                 Category category = getCategoryFromResultSet(rs);
                 return category;
             }
+            connection.close();
         }catch (SQLException ex){
             printSQLException(ex);
         }
@@ -59,6 +60,7 @@ public class CategoryDAO extends DatabaseQuery implements ICategoryDAO {
                 Category category = getCategoryFromResultSet(rs);
                 listCategory.add(category);
             }
+            connection.close();
         }catch (SQLException ex){
             printSQLException(ex);
         }
