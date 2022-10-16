@@ -248,7 +248,7 @@
 
                                                 <c:forEach items="${requestScope.listProductDTO}" var="product">
                                                     <div class="col-lg-3">
-                                                        <div class="single_product">
+                                                        <div class="single_product" id="idproduct${product.getId()}">
                                                             <div class="product_thumb">
                                                                 <a href="single-product.html">
                                                                     <img <c:choose>
@@ -261,7 +261,7 @@
                                                                     <img src="/frontend/assets\img\cart\span-new.png" alt="">
                                                                 </div>
                                                                 <div class="product_action">
-                                                                    <a href="#"> <i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                                                    <a> <i class="fa fa-shopping-cart"></i> Add to cart</a>
                                                                 </div>
                                                             </div>
                                                             <div class="product_content">
@@ -500,9 +500,40 @@
             </div> 
             
           <!-- modal area end --> 
-            
-            
-      
+
+            <script>
+                window.onload = ()=>{
+                    if(getDataLocalStorage(app.KEY_CART)!=null){
+                        cart = getDataLocalStorage(app.KEY_CART);
+                    }else{
+                        cart = new Cart();
+                        cart.setIdCart(1);
+                        cart.setCartItems([])
+                        setDataLocalStorage(app.KEY_CART, cart);
+                    }
+                    console.log(cart)
+                    renderMiniCart(cart);
+                    renderSumaryCart(cart);
+                    let productAction  = document.querySelectorAll(".product_action");
+
+                    productAction.forEach((product)=>{
+                        product.addEventListener("click", ()=>{
+                            let productParent = product.parentNode.parentNode;
+                            let productId = productParent.id.substring(9, productParent.id.length);
+                            let productImgUrl = productParent.querySelector(".product_thumb > a > img").src;
+                            let productName = productParent.querySelector(".product_content > h3 > a").innerText;
+                            let productPrice = productParent.querySelector(".product_content > span").innerText;
+
+                            let p1 = new Product(productId, productName, productImgUrl, productPrice);
+                            cart.addProductToCart(p1);
+                            renderMiniCart(cart);
+                            renderSumaryCart(cart);
+                            setDataLocalStorage(app.KEY_CART, cart);
+                        });
+                    })
+                    handleSumaryCartClick();
+                }
+            </script>
 		
 		<!-- all js here -->
     <jsp:include page="/layout/frontend/footer_js.jsp"></jsp:include>

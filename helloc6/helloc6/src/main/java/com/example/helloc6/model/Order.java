@@ -69,4 +69,16 @@ public class Order {
         this.idStatus = idStatus;
         this.total = total;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", idStatus=" + idStatus +
+                ", total=" + total +
+                '}';
+    }
 }

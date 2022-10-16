@@ -166,11 +166,11 @@
     });
     
     
-    /*mini cart slideToggle*/
-    
-    $(".shopping_cart").on("click", function() {
-            $('.mini_cart').slideToggle('medium');
-    }); 
+    // /*mini cart slideToggle*/
+    //
+    // $(".shopping_cart").on("click", function() {
+    //         $('.mini_cart').slideToggle('medium');
+    // });
     
     
     
