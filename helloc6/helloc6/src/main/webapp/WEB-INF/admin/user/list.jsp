@@ -46,6 +46,28 @@
                         <!-- end page title -->
 
                         <div class="row">
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6">
+                                <form action="/user" method="get" class="form-horizontal form-group row" >
+                                    <div class="col-5" style="padding-right: 5px">
+                                        <input class="form-control" type="text" placeholder="search.." name="q" value="${requestScope.q}">
+                                    </div>
+                                    <div class="col-5" style="padding-right: 5px">
+                                        <select  name="idcountry"class="form-control" >
+                                            <option value="-1">All</option>
+                                            <c:forEach items="${applicationScope.listCountry}" var="country">
+                                                <option <c:if test="${requestScope.idcountry == country.getId()}">selected</c:if> value="${country.getId()}">${country.getName()}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="col-2" style="padding-left: 0px;">
+                                        <input style="padding-right: 12px" type="submit" value="Search" class="form-control bg-primary"/>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm-12">
                                 <table class="table m-0">
 
@@ -58,7 +80,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${requestScope.list}" var="user">
+                                    <c:forEach items="${requestScope.listUser}" var="user">
                                         <tr>
                                             <th scope="row">${user.getId()}</th>
                                             <td>
@@ -80,6 +102,37 @@
                                 <!-- end card-box -->
                             </div>
                             <!-- end col -->
+                        </div>
+                        <div>
+                            <ul class="pagination pagination-split justify-content-end">
+
+                                <c:if test="${currentPage != 1}">
+                                    <li class="page-item disabled">
+                                        <a href="/user?page=${currentPage - 1}&q=${requestScope.q}&idcountry=${requestScope.idcountry}" class="page-link"><i class="fa fa-angle-left"></i></a>
+                                    </li>
+                                </c:if>
+                                <c:forEach begin="1" end="${noOfPages}" var="i">
+                                    <c:choose>
+                                        <c:when test="${currentPage eq i}">
+                                            <li class="page-item active">
+                                                <a class="page-link">${i}</a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item">
+                                                <a href="/user?page=${i}&q=${requestScope.q}&idcountry=${requestScope.idcountry}" class="page-link">${i}</a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                                <c:if test="${currentPage lt noOfPages}">
+                                    <li class="page-item">
+                                        <a href="/user?page=${currentPage + 1}&q=${requestScope.q}&idcategory=${requestScope.idcountry}" class="page-link"><i class="fa fa-angle-right"></i></a>
+                                    </li>
+                                </c:if>
+
+                            </ul>
+
                         </div>
                         <!-- end row -->
 

@@ -85,10 +85,35 @@ public class UserServlet extends HttpServlet {
     }
 
     private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/admin/user/list.jsp");
-        List<User> listUser = iUserDAO.selectAllUsers();
+        int page = 1;
+        int recordsPerPage = 3;
+        String q = "";
+        int idcountry = -1;
 
-         request.setAttribute("list", listUser);
+        if(request.getParameter("q")!=null){
+            q = request.getParameter("q");
+        }
+        if(request.getParameter("idcountry")!=null){
+            idcountry = Integer.parseInt(request.getParameter("idcountry"));
+        }
+        List<User> userList = iUserDAO.selectAllUsersPaggingFilter((page-1)*recordsPerPage,recordsPerPage, q, idcountry);
+        int noOfRecords = iUserDAO.getNoOfRecords();
+        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+
+        if(request.getParameter("page") != null)
+            page = Integer.parseInt(request.getParameter("page"));
+
+        request.setAttribute("listUser", userList);
+        request.setAttribute("noOfPages", noOfPages);
+        request.setAttribute("currentPage", page);
+
+        request.setAttribute("q", q);
+        request.setAttribute("idcountry", idcountry);
+
+
+
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/admin/user/list.jsp");
         requestDispatcher.forward(request, response);
     }
 

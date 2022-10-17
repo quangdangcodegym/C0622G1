@@ -204,7 +204,11 @@ class Cart{
 
 let cart;
 function getDataLocalStorage(key){
-    let cart = Object.assign(new Cart(), JSON.parse(localStorage.getItem(key)));
+    return JSON.parse(localStorage.getItem(key));
+
+}
+function getDataFromCartInStorage(cartData){
+    let cart = Object.assign(new Cart(), JSON.parse(data));
     let cartItems = [];
     for(let i=0;i<cart.getCartItems().length;i++){
         let product = Object.assign(new Product(), cart.getCartItems()[i].product);
@@ -215,7 +219,6 @@ function getDataLocalStorage(key){
     cart.setCartItems(cartItems)
     return cart;
 }
-
 function setDataLocalStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
 }

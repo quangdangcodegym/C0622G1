@@ -15,14 +15,74 @@ public class UserDAO extends DatabaseQuery implements IUserDAO {
             "VALUES (?, ?, ?)";
     private static final String CHECK_EMAIL_EXISTS = "SELECT * FROM users where email = ?";
     private static final String SP_EDIT_USER = "call c6_customermanager.sp_editUser(?, ?, ?, ?, ?)";
+    private static final String SELECT_ALL_USER_PAGGING_FILLTER = "select SQL_CALC_FOUND_ROWS * from users where name like ? and idCountry = ? limit ?, ?;";
+    private static final String SELECT_ALL_USER_PAGGING_FILLTER_ALL = "select SQL_CALC_FOUND_ROWS * from users where name like ? limit ?, ?;";
 
+    private int noOfRecords;
 
 
     private String SELECT_ALL_USERS = "SELECT id, name, email, idcountry FROM users";
     private String SELECT_USER_BYID = "SELECT id, name, email, idcountry FROM users where id = ?";
 
 
+    public int getNoOfRecords() {
+        return noOfRecords;
+    }
 
+    public void setNoOfRecords(int noOfRecords) {
+        this.noOfRecords = noOfRecords;
+    }
+
+    @Override
+    public List<User> selectAllUsersPaggingFilter(int offset, int noOfRecords, String q, int idCountry){
+        List<User> userList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        try {
+
+            Connection connection = getConnection();
+            if(idCountry!=-1){
+                preparedStatement = connection.prepareStatement(SELECT_ALL_USER_PAGGING_FILLTER);
+                // select SQL_CALC_FOUND_ROWS * from users where name like ? and idCountry = ? limit ?, ?;
+                // idcountry = -1 => lấy tất cả
+                // idcountry != -1
+                preparedStatement.setString(1,"%" + q + "%" );
+                preparedStatement.setInt(2, idCountry);
+                preparedStatement.setInt(3, offset);
+                preparedStatement.setInt(4, noOfRecords);
+            }else{
+                preparedStatement = connection.prepareStatement(SELECT_ALL_USER_PAGGING_FILLTER_ALL);
+                preparedStatement.setString(1, "%" + q + "%");
+                preparedStatement.setInt(2, offset);
+                preparedStatement.setInt(3, noOfRecords);
+            }
+            System.out.println(this.getClass() + " selectAllUsersPaggingFilter " + preparedStatement);
+
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                User user = getUserFromResultSet(rs);
+                userList.add(user);
+            }
+            rs = preparedStatement.executeQuery("SELECT FOUND_ROWS();");
+            if(rs.next())
+                this.noOfRecords = rs.getInt(1);
+
+            return userList;
+        } catch (SQLException exception) {
+            printSQLException(exception);
+        }
+        return null;
+    }
+
+    private User getUserFromResultSet(ResultSet rs) throws SQLException{
+        int id = rs.getInt("id");
+        String name = rs.getString("name");
+        String email = rs.getString("email");
+        int countryId = rs.getInt("idCountry");
+
+        User user = new User(id, name, email, countryId);
+        return user;
+    }
 
     @Override
     public void insertUser(User user) throws SQLException {

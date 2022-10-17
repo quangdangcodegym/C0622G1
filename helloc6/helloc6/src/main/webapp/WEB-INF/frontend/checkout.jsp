@@ -108,13 +108,14 @@
             <script>
                 window.onload = ()=>{
                     if(getDataLocalStorage(app.KEY_CART)!=null){
-                        cart = getDataLocalStorage(app.KEY_CART);
+                        cart = getDataFromCartInStorage(getDataLocalStorage(app.KEY_CART));
                     }else{
                         cart = new Cart();
                         cart.setIdCart(1);
                         cart.setCartItems([])
                         setDataLocalStorage(app.KEY_CART, cart);
                     }
+                    console.log(cart)
                     let orderTableHtml = document.querySelector(".order_table");
                     renderOrderTableCheckoutPage(orderTableHtml, cart);
                     let btnCheckoutProcess = document.querySelector(".payment_method > .order_button > button");

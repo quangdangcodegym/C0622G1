@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface IUserDAO {
+    public int getNoOfRecords();
+    public List<User> selectAllUsersPaggingFilter(int offset, int noOfRecords, String q, int idCountry);
     public void insertUser(User user) throws SQLException;
 
     public User selectUser(int id) throws SQLException;

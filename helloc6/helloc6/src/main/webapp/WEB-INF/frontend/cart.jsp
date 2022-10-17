@@ -138,15 +138,15 @@
       
 		<script>
             window.onload = ()=>{
-
                 if(getDataLocalStorage(app.KEY_CART)!=null){
-                    cart = getDataLocalStorage(app.KEY_CART);
+                    cart = getDataFromCartInStorage(getDataLocalStorage(app.KEY_CART));
                 }else{
                     cart = new Cart();
                     cart.setIdCart(1);
                     cart.setCartItems([])
                     setDataLocalStorage(app.KEY_CART, cart);
                 }
+                console.log(cart)
                 console.log(cart)
                 let cartPageHtml  = document.querySelector(".cart_page tbody");
                 renderCartPage(cartPageHtml, cart);

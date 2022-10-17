@@ -504,7 +504,7 @@
             <script>
                 window.onload = ()=>{
                     if(getDataLocalStorage(app.KEY_CART)!=null){
-                        cart = getDataLocalStorage(app.KEY_CART);
+                        cart = getDataFromCartInStorage(getDataLocalStorage(app.KEY_CART));
                     }else{
                         cart = new Cart();
                         cart.setIdCart(1);
