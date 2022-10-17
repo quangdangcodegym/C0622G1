@@ -52,7 +52,7 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showCreateProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/dashboard/product/create.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/admin/product/create.jsp");
         requestDispatcher.forward(req, resp);
     }
 
@@ -85,7 +85,7 @@ public class ProductServlet extends HttpServlet {
         req.setAttribute("idcategory", idcategory);
 
         req.setAttribute("listProductDTO", productDTOList);
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/dashboard/product/list.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/admin/product/list.jsp");
         requestDispatcher.forward(req, resp);
     }
 }

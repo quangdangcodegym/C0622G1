@@ -64,13 +64,13 @@ public class UserServlet extends HttpServlet {
             RequestDispatcher requestDispatcher;
             if(user ==null){
                 // User khong ton tai
-                requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/list.jsp");
+                requestDispatcher = request.getRequestDispatcher("/WEB-INF/admin/user/list.jsp");
                 request.setAttribute("message", "User khong ton tai");
                 List<User> list = iUserDAO.selectAllUsers();
                 request.setAttribute("list", list);
 
             }else{
-                requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/edit.jsp");
+                requestDispatcher = request.getRequestDispatcher("/WEB-INF/admin/user/edit.jsp");
                 request.setAttribute("user", user);
             }
 
@@ -85,7 +85,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void listUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/list.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/admin/user/list.jsp");
         List<User> listUser = iUserDAO.selectAllUsers();
 
          request.setAttribute("list", listUser);
@@ -93,7 +93,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/create.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/admin/user/create.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -122,7 +122,7 @@ public class UserServlet extends HttpServlet {
     private void editUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         List<String> errors = new ArrayList<>();
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/edit.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/admin/user/edit.jsp");
         User user = new User();
         try{
             int idUser = Integer.parseInt(request.getParameter("id"));
@@ -162,7 +162,7 @@ public class UserServlet extends HttpServlet {
                         request.setAttribute("message", "Update success!!.....");
                         List<User> listUser = iUserDAO.selectAllUsers();
                         request.setAttribute("list", listUser);
-                        requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/list.jsp");
+                        requestDispatcher = request.getRequestDispatcher("/WEB-INF/admin/user/list.jsp");
                     }
                 }else {
                     if(country==null){
@@ -194,7 +194,7 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/dashboard/user/create.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/admin/user/create.jsp");
         User user = new User();
             try{
 

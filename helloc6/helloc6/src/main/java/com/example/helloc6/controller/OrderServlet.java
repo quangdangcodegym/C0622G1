@@ -92,7 +92,7 @@ public class OrderServlet extends HttpServlet {
             idOrder = Integer.parseInt(req.getParameter("id"));
             OrderDTO orderDTO = iOrderDTODAO.selectOrderDTO(idOrder);
             req.setAttribute("orderDTO", orderDTO);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/dashboard/order/edit.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/admin/order/edit.jsp");
             requestDispatcher.forward(req, resp);
 
 
@@ -107,7 +107,7 @@ public class OrderServlet extends HttpServlet {
     private void showListOrder(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
             List<OrderDTO> orderDTOList = iOrderDTODAO.selectAllOrderDTO();
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/dashboard/order/list.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/admin/order/list.jsp");
             req.setAttribute("orderDTOList", orderDTOList);
             requestDispatcher.forward(req, resp);
         }catch (SQLException sqlException){
