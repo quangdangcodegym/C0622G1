@@ -14,6 +14,7 @@ public class Product {
 
     private int idCategory;
 
+
     public int getIdCategory() {
         return idCategory;
     }

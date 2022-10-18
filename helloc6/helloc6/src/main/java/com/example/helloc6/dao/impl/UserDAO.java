@@ -25,6 +25,17 @@ public class UserDAO extends DatabaseQuery implements IUserDAO {
     private String SELECT_USER_BYID = "SELECT id, name, email, idcountry FROM users where id = ?";
 
 
+    @Override
+    public boolean checkUserNamePassword(String username, String password) {
+        if (username.equals("admin") && password.equals("123123")) {
+            return true;
+        }
+        if (username.equals("user") && password.equals("123123")) {
+            return true;
+        }
+        return false;
+    }
+
     public int getNoOfRecords() {
         return noOfRecords;
     }

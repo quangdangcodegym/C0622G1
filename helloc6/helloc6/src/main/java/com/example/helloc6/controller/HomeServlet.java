@@ -22,6 +22,8 @@ public class HomeServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Request session ID: " + req.getRequestedSessionId());
+        System.out.println("Session ID: " + req.getSession().getId());
         List<ProductDTO> listProduct = iProductDTODAO.selectAllProductDTOs();
 
         req.setAttribute("listProductDTO", listProduct);
